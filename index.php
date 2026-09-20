@@ -1,3 +1,19 @@
+<!-- NOTE: Selalu mulai dengan session_start() buat mulai sesi -->
+<!-- isset() dipake buat cek isi value, misal ada isinya atau kosong, tergantung cara makenya kalo disini
+     cek apakah isinya si session logged_in_user atau user yang logged in ada ga? kalo ga ada user yang log in
+     redirect pake header() ke login.php. Gunanya exit(); itu biar langsung stop, jadi ga dilanjutin tuh ke codingan
+     bawahnya, kalo isset() cek dan ada logged_in_user di session, dia baru lanjutin ke codingan bawahnya --> 
+
+<?php
+session_start();
+
+if(!isset($_SESSION['logged_in_user'])){
+    header("Location: login.php");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +28,11 @@
 
     <!-- TODO: Print logged in user name in "user-name" span here -->
     <!-- CODE STARTS HERE -->
+    <!-- NOTE: {enter user name here} jadi echo $_SESSION['logged_in_user']['name']; jgn lupa open pake
+         php biar kebaca. jadi disini dia print tulisan dari session logged_in_user di bagian nama -->
+
     <div>
-        Welcome, <span id="user-name">{enter user name here}</span>
+        Welcome, <span id="user-name"><?php echo $_SESSION['logged_in_user']['name']; ?></span>
     </div>
     <!-- CODE ENDS HERE -->
 
